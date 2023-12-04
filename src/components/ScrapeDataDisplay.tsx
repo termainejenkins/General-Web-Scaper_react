@@ -6,7 +6,16 @@ interface ScrapedDataDisplayProps {
 }
 
 const ScrapedDataDisplay: React.FC<ScrapedDataDisplayProps> = ({ scrapedData }) => {
-  return <div>{scrapedData && <div>Scraped Data: {scrapedData}</div>}</div>;
+  return (
+    <div>
+      {scrapedData && (
+        <div>
+          <h2>Scraped Data</h2>
+          <pre>{scrapedData}</pre>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default ScrapedDataDisplay;

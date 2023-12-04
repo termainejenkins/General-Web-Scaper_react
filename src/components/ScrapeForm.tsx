@@ -10,6 +10,8 @@ const ScrapeForm: React.FC<ScrapeFormProps> = ({ onScrape }) => {
   const [dataSelector, setDataSelector] = useState('');
 
   const handleScrape = () => {
+    console.log('URL:', url);
+    console.log('Data Selector:', dataSelector);
     onScrape(url, dataSelector);
   };
 

@@ -1,22 +1,30 @@
 // backend/server.js
+// server.js
 import express from 'express';
 import axios from 'axios';
-import cheerio from 'cheerio';
+import bodyParser from 'body-parser';
+import cors from 'cors'; // Import cors package
 
 const PORT = 8000;
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello, World! This is the backend.');
-});
+app.use(cors()); // Enable CORS
+app.use(bodyParser.json());
 
-// Example scraping route
 app.post('/scrape', async (req, res) => {
-  const { url, dataSelector } = req.body;
+  const { url } = req.body;
 
-  // Implement your web scraping logic here using axios and cheerio
+  try {
+    const response = await axios.get(url);
+    const scrapedData = response.data; // Assuming the response is plain text
 
-  res.send({ scrapedData: 'Scraped data goes here' });
+    // You can save scrapedData to a file or database if needed
+
+    res.json({ data: scrapedData });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred during scraping.' });
+  }
 });
 
-app.listen(PORT, () => console.log(`Backend server running on PORT ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
