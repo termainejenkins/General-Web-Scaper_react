@@ -1,23 +1,18 @@
+// server.js
 import express from 'express';
 import axios from 'axios';
 import bodyParser from 'body-parser';
-import { createProxyMiddleware } from 'http-proxy-middleware';
+import cors from 'cors';
 
 const PORT = 8000;
 const app = express();
 
+app.use(cors()); // Enable CORS
+
 app.use(bodyParser.json());
 
-// This is a proxy route for the /scrape endpoint. "Reverse proxy or API proxy"
-app.use(
-  '/scrape',
-  createProxyMiddleware({
-    target: 'http://localhost:8000',  // This is the backend server's URL
-    changeOrigin: true,
-  })
-);
+app.options('/scrape', cors()); // Enable preflight CORS for the /scrape route
 
-// Express Server route for existing /scrape route
 app.post('/scrape', async (req, res) => {
   const { url } = req.body;
 
@@ -25,7 +20,7 @@ app.post('/scrape', async (req, res) => {
     const response = await axios.get(url);
     const scrapedData = response.data; // Assuming the response is plain text
 
-    // You can save scrapedData to a file or database if needed
+    // We can save scrapedData to a file or database if needed
 
     res.json({ data: scrapedData });
   } catch (error) {

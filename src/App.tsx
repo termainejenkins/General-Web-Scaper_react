@@ -11,7 +11,7 @@ const App: React.FC = () => {
   const handleScrape = async (url: string, dataSelector?: string) => {
     console.log('Handling scrape...');
     try {
-      setLoading(true); // Set loading to true when starting the scraping operation
+      setLoading(true);
 
       console.log('Sending request to:', url);
       console.log('Using data selector:', dataSelector || 'No data selector provided');
@@ -22,15 +22,24 @@ const App: React.FC = () => {
       setScrapedData(response.data.data);
     } catch (error) {
       console.error('Error during scraping:', error);
-      setScrapedData('An error occurred during scraping.');
+
+      // If there is an error, attempt to fetch raw text directly from the URL
+      try {
+        const rawTextResponse = await fetch(url);
+        const rawText = await rawTextResponse.text();
+        setScrapedData(rawText);
+      } catch (fetchError) {
+        console.error('Error fetching raw text:', fetchError);
+        setScrapedData('An error occurred during scraping.');
+      }
     } finally {
-      setLoading(false); // Set loading to false when the operation completes (either success or failure)
+      setLoading(false);
     }
   };
 
   return (
     <div>
-      <h1>General Web Scaper</h1>
+      <h1>General Web Scraper</h1>
       <ScrapeForm onScrape={handleScrape} />
       {loading ? (
         <p>Loading...</p>
