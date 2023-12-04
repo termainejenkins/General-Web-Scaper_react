@@ -4,13 +4,15 @@ import axios from 'axios';
 import ScrapeForm from './components/ScrapeForm';
 import ScrapedDataDisplay from './components/ScrapedDataDisplay';
 
-
 const App: React.FC = () => {
   const [scrapedData, setScrapedData] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleScrape = async (url: string, dataSelector?: string) => {
     console.log('Handling scrape...');
     try {
+      setLoading(true); // Set loading to true when starting the scraping operation
+
       console.log('Sending request to:', url);
       console.log('Using data selector:', dataSelector || 'No data selector provided');
 
@@ -21,16 +23,22 @@ const App: React.FC = () => {
     } catch (error) {
       console.error('Error during scraping:', error);
       setScrapedData('An error occurred during scraping.');
+    } finally {
+      setLoading(false); // Set loading to false when the operation completes (either success or failure)
     }
   };
 
   return (
     <div>
-      <h1>Web Scraping App</h1>
+      <h1>General Web Scaper</h1>
       <ScrapeForm onScrape={handleScrape} />
-      <ScrapedDataDisplay scrapedData={scrapedData} />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ScrapedDataDisplay scrapedData={scrapedData} />
+      )}
     </div>
   );
 };
-console.log("TESTING TESTING--App started")
+
 export default App;

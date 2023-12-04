@@ -11,10 +11,16 @@ const ScrapeForm: React.FC<ScrapeFormProps> = ({ onScrape }) => {
   const [dataSelector, setDataSelector] = useState('');
 
   const handleScrape = () => {
-    console.log('URL:', url);
-    console.log('Data Selector:', dataSelector);
-    onScrape(url, dataSelector);
-  };  
+    if (url.trim() !== '') {
+      console.log('URL:', url);
+      console.log('Data Selector:', dataSelector);
+      onScrape(url, dataSelector);
+    } else {
+      // Handle empty URL case
+      console.error('Please enter a valid URL.');
+    }
+  };
+  
 
   return (
     <div>
