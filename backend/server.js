@@ -8,7 +8,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// This is a proxy route for the /scrape endpoint
+// This is a proxy route for the /scrape endpoint. "Reverse proxy or API proxy"
 app.use(
   '/scrape',
   createProxyMiddleware({
