@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ScrapeForm from './components/ScrapeForm';
-import ScrapedDataDisplay from './components/ScrapeDataDisplay';
+import ScrapedDataDisplay from './components/ScrapedDataDisplay';
 
 
 const App: React.FC = () => {

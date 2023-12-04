@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 
 interface ScrapeFormProps {
-  onScrape: (url: string, dataSelector: string) => void;
+  onScrape: (url: string, dataSelector?: string) => void;
 }
+
 
 const ScrapeForm: React.FC<ScrapeFormProps> = ({ onScrape }) => {
   const [url, setUrl] = useState('');
@@ -13,7 +14,7 @@ const ScrapeForm: React.FC<ScrapeFormProps> = ({ onScrape }) => {
     console.log('URL:', url);
     console.log('Data Selector:', dataSelector);
     onScrape(url, dataSelector);
-  };
+  };  
 
   return (
     <div>

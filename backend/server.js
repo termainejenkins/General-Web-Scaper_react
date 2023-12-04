@@ -1,4 +1,3 @@
-// backend/server.js
 // server.js
 import express from 'express';
 import axios from 'axios';
@@ -23,8 +22,11 @@ app.post('/scrape', async (req, res) => {
     res.json({ data: scrapedData });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'An error occurred during scraping.' });
+
+    // Return a more detailed error response
+    res.status(500).json({ error: 'An error occurred during scraping.', details: error.message });
   }
 });
+
 
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
