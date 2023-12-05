@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const handleScrape = async (url: string, dataSelector?: string) => {
-    console.log('Handling scrape...');
+    console.log('Attempting to scrape...');
     try {
       setLoading(true);
 
@@ -44,6 +44,8 @@ const App: React.FC = () => {
 
   // Sanitize the raw HTML text
   const sanitizedText = DOMPurify.sanitize(scrapedData.content, { ALLOWED_TAGS: [] });
+  console.log('Sanitized text completed');
+  console.log('sanitizedText:', sanitizedText);
 
   return (
     <div>

@@ -3,6 +3,7 @@ import React from 'react';
 
 interface ScrapedDataDisplayProps {
   scrapedData: string;
+  isRawHTML: boolean;
 }
 
 const ScrapedDataDisplay: React.FC<ScrapedDataDisplayProps> = ({ scrapedData }) => {
