@@ -8,6 +8,26 @@
   text-align: center;
 }
 
+h1 {
+  text-align: center;
+}
+
+.button-container,
+.card-heading {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  margin: auto;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1em; /* Adjust the gap as needed */
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
